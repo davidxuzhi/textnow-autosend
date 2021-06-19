@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2 # 使用官方提供的checkout 2.0版本获取代码
+        with:
+          path: ~/source
       - name: Setup node.js
         uses: actions/setup-node@v1 # 使用官方提供的setup-node 1.0版本配置node环境
         with:
@@ -37,9 +39,22 @@ jobs:
             let count=1
             for i in "$@"; do
               echo Start account: $count....
-              TEXTNOW_COOKIES="$i" node index.js || true;
+              TEXTNOW_COOKIES="$i" node ~/source/index.js || true;
               let count+=1
             done
           }
           eval main $(sed 's/^/"/g;s/$/"/g;s/|+|/" "/g'<<<${TEXTNOW_COOKIES})
-          tar zcf ~/cache.tgz .cache
+          tar zcf ~/cache.tgz .cache                           
+
+      - name: commit change
+        run: |
+          sed -i '$a"happy every day"' ~/source/test.txt
+          cd ~/source
+          git config user.name davidxuzhi
+          git config user.email davidxuzhi@gmail.com
+          git add -A .
+          current_time=`date "+%Y%m%d%H%M%S"`
+          git commit -m "Update at $current_time"
+          git push
+
+
