@@ -8,7 +8,7 @@
   const crypto = require('crypto');
   // updated info
   const fstream = require("fs");
-  const testfile = "test.txt";
+  const testfile = "./test.txt";
   var testStr = "";  
   // updated info
 
