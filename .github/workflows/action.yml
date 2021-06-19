@@ -10,8 +10,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2 # 使用官方提供的checkout 2.0版本获取代码
-        with:
-          path: ~/source
       - name: Setup node.js
         uses: actions/setup-node@v1 # 使用官方提供的setup-node 1.0版本配置node环境
         with:
@@ -34,12 +32,12 @@ jobs:
         run: |
           mkdir .cache
           if [ -e ~/cache.tgz ]; then tar zxf ~/cache.tgz; fi
-          if [ "${TEXTNOW_COOKIES}" == "" ]; then node ~/source/index.js; exit 0; fi
+          if [ "${TEXTNOW_COOKIES}" == "" ]; then node index.js; exit 0; fi
           main() {
             let count=1
             for i in "$@"; do
               echo Start account: $count....
-              TEXTNOW_COOKIES="$i" node ~/source/index.js || true;
+              TEXTNOW_COOKIES="$i" node index.js || true;
               let count+=1
             done
           }
@@ -48,11 +46,10 @@ jobs:
 
       - name: commit change
         run: |
-          sed -i '$a"happy every day"' ~/source/test.txt
-          cd ~/source
+          sed -i '$a"happy every day"' test.txt          
           git config user.name davidxuzhi
           git config user.email davidxuzhi@gmail.com
-          git add -A .
+          git add .
           current_time=`date "+%Y%m%d%H%M%S"`
           git commit -m "Update at $current_time"
           git push
