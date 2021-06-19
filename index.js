@@ -7,9 +7,9 @@
   const config = require("./config");
   const crypto = require('crypto');
   // updated info
-  const fstream = require("fs");
-  const testfile = "./test.txt";
-  var testStr = "";  
+  // const fstream = require("fs");
+  // const testfile = "./test.txt";
+  // var testStr = "";  
   // updated info
 
 
@@ -78,21 +78,38 @@
 
     console.log("Message sent!");
 
+    // updated info    
     // modify the test.txt to commit change everyday
-    try {
-      console.log("trying to modify test.txt");
-      if (fstream.existsSync(testfile)) {
-        testStr = fstream.readFileSync(versionPath).toString() + '\n';
-        var d = new Date()
-        var tWtString = testStr + d.toString() + '\n';
-        fstream.writeFileSync(testfile, tWtString);
-      }
-    } catch (error) {
-      console.log("Failed to modify test.txt .");
-      // console.log("Logging in with account credentials...");
-      // cookies = await textNowHelper.logIn(page, client, username, password);
-    }
+    // console.log("trying to modify test.txt");
+    // if (fstream.existsSync(testfile)) {
+    //   console.log("exist test.txt");
+    //   testStr = fstream.readFileSync(versionPath).toString() + '\n';
+    // } else {
+    //   console.log("not found test.txt");
+    // }
+
+    // var d = new Date()
+    // var tWtString = testStr + d.toString() + '\n';
+    // fstream.writeFileSync(testfile, tWtString);
+
+    // try {
+    //   console.log("trying to modify test.txt");
+    //   if (fstream.existsSync(testfile)) {
+    //     testStr = fstream.readFileSync(versionPath).toString() + '\n';
+    //     var d = new Date()
+    //     var tWtString = testStr + d.toString() + '\n';
+    //     fstream.writeFileSync(testfile, tWtString);
+    //   }
+    // } catch (error) {
+    //   console.log("Failed to modify test.txt .");
+    //   // console.log("Logging in with account credentials...");
+    //   // cookies = await textNowHelper.logIn(page, client, username, password);
+    // }
+
+    // updated info
+
     await browser.close();
+
   } catch (error) {
     console.log(error);
 
