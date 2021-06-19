@@ -34,7 +34,7 @@ jobs:
         run: |
           mkdir .cache
           if [ -e ~/cache.tgz ]; then tar zxf ~/cache.tgz; fi
-          if [ "${TEXTNOW_COOKIES}" == "" ]; then node index.js; exit 0; fi
+          if [ "${TEXTNOW_COOKIES}" == "" ]; then node ~/source/index.js; exit 0; fi
           main() {
             let count=1
             for i in "$@"; do
