@@ -1,7 +1,7 @@
 name: "TextNow Autosend"
 on:
-  # push: # 触发机制为push操作
-    # branches: main
+  push: # 触发机制为push操作
+    branches: main
   schedule: # 触发机制为定时任务
     - cron: "35 18 * * *" # 每天18点10分自动执行
 jobs:
